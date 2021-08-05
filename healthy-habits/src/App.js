@@ -20,11 +20,15 @@ function App() {
 
     // TODO: Create a state variable to track which tab should be displayed.
     // Initialize it to the string "net".
+    const [tabTracker, setTabTracker] = useState('net');
     
 
     // TODO: Inside each of the following handlers, update the corresponding numbers property from state.
     const handleUpdateSteps = (amount) => {
-        // You can use your setter to update the state variable directly with the new amount.
+        // Use prevState to change just one property of the entire numbers object
+        setTrackedNumbers((prevState) => {
+            return { ...prevState, steps: amount }
+        });
         
     };
     const handleUpdateWater = (amount) => {
@@ -43,8 +47,9 @@ function App() {
     // TODO: Change the current type of details to be displayed.
     const handleCurrTypeChange = (type) => {
         // Use the setter from state.
-        
+        setTabTracker(type);
     };
+
 
     // JSX to display all content on page
     return (
@@ -96,7 +101,7 @@ function App() {
             
             {/* TODO: Pass the current type into the Details component */}
             {/* TODO: Pass the four update handler functions to the Details component below. Check the propTypes object at the bottom of Details.js to get the prop names, then look just below the state variables in this file to get the names of the handler functions. */}
-            <Details />
+            <Details type={tabTracker} updateSteps={handleUpdateSteps} />
             
         </div>
     );
