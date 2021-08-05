@@ -5,7 +5,17 @@ import "./App.css";
 
 function App() {
 
-    // TODO: Create a state variable to hold the five numbers to track. This should be an object with five properties: steps, water, food, exercise, and net. They should each be initialized with with a zero value (as a number).  Notice the hook you need has been imported at the top.
+    // TODO: Create a state variable to hold the five numbers to track. 
+    //This should be an object with five properties: steps, water, food, exercise, and net. 
+    //They should each be initialized with with a zero value (as a number).  
+    //Notice the hook you need has been imported at the top.
+    const [trackedNumbers, setTrackedNumbers] = useState({
+        steps: 0,
+        water: 0,
+        food: 0,
+        exercise: 0,
+        net: 0
+    });
 
 
     // TODO: Create a state variable to track which tab should be displayed.
@@ -45,7 +55,7 @@ function App() {
             </header>
 
             {/* TODO: Pass the numbers object into the Chart component as a prop */}
-            <Chart />
+            <Chart numbers={trackedNumbers} />
 
             <div className="tabs-container">
                 <div
