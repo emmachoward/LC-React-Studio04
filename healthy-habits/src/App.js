@@ -32,16 +32,23 @@ function App() {
         
     };
     const handleUpdateWater = (amount) => {
-        // You can use your setter to update the state variable directly with the new amount.
-
+        // Use prevState to change just one property of the entire numbers object
+        setTrackedNumbers((prevState) => {
+            return { ...prevState, water: amount }
+        });
+        
     };
     const handleUpdateFood = (amount) => {
         // You'll need to update both the food calories and the net calories here (add calories consumed). Use prevState to ensure you are adding the new amount to the existing total.
-
+        setTrackedNumbers((prevState) => {
+            return { ...prevState, food: Number(amount) + trackedNumbers.food, net: Number(amount) + trackedNumbers.net }
+        });
     };
     const handleUpdateExercise = (amount) => {
         // You'll need to update both the food calories and the net calories here (subtract calories burned). Use prevState to ensure you are adding the new amount to the existing total. 
-
+        setTrackedNumbers((prevState) => {
+            return { ...prevState, exercise: Number(amount) + trackedNumbers.exercise, net: trackedNumbers.net - Number(amount)  }
+        });
     };
 
     // TODO: Change the current type of details to be displayed.
@@ -101,7 +108,12 @@ function App() {
             
             {/* TODO: Pass the current type into the Details component */}
             {/* TODO: Pass the four update handler functions to the Details component below. Check the propTypes object at the bottom of Details.js to get the prop names, then look just below the state variables in this file to get the names of the handler functions. */}
-            <Details type={tabTracker} updateSteps={handleUpdateSteps} />
+            <Details type={tabTracker} 
+            updateSteps={handleUpdateSteps} 
+            updateWater={handleUpdateWater}
+            updateFood={handleUpdateFood}
+            updateExercise={handleUpdateExercise}
+            />
             
         </div>
     );
